@@ -121,11 +121,7 @@ export function ChatWindow({ thread, onThreadUpdate }: ChatWindowProps) {
               ref={textareaRef}
             />
             <PromptInputFooter className="justify-end">
-              <PromptInputSubmit
-                onStop={stop}
-                status={status}
-                tooltip={isLoading ? "Stop" : "Send message"}
-              />
+              <PromptInputSubmit onStop={stop} status={status} />
             </PromptInputFooter>
           </PromptInput>
         </div>
@@ -147,7 +143,7 @@ function ChatMessage({ message }: { message: UIMessage }) {
             {reasoningParts.map((part, i) => (
               <div key={i}>
                 {part.type === "reasoning" && (
-                  <MessageResponse>{part.reasoning}</MessageResponse>
+                  <MessageResponse>{part.text}</MessageResponse>
                 )}
               </div>
             ))}
