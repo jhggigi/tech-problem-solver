@@ -1,9 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { nanoid } from "nanoid";
-import { useEffect } from "react";
+import { createFileRoute, useParams } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/")({
-  component: IndexPage,
+import { ChatLayout } from "@/components/chat/chat-layout";
+
+export const Route = createFileRoute("/$threadId")({
+  component: ThreadPage,
   head: () => ({
     meta: [
       { title: "Technical AI" },
@@ -16,12 +16,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-function IndexPage() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate({ to: "/$threadId", params: { threadId: nanoid() } });
-  }, [navigate]);
-
-  return null;
+function ThreadPage() {
+  const { threadId } = useParams({ from: "/$threadId" });
+  return <ChatLayout activeThreadId={threadId} />;
 }
